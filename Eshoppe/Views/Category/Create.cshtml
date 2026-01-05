@@ -1,5 +1,6 @@
 ﻿@model Eshoppe.Models.Category
 <form asp-action="Create" method="post">
+    @* <div asp-validation-summary="All"></div> *@
     <div class="form-group">
         <label asp-for="Name" class="control-label"></label>
         <input asp-for="Name" class="form-control" />
@@ -14,4 +15,9 @@
         <input type="submit" value="Create" class="btn btn-primary" />
         <a asp-controller="Category" asp-action="Index" class="btn btn-link">Back to List</a>
     </div>
-    </form>
+</form>
+@section scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
