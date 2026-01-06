@@ -33,10 +33,73 @@ namespace Eshoppe.Controllers
             {
                 _db.Categories.Add(category);
                 _db.SaveChanges();
-                return RedirectToAction("Index"); 
+                return RedirectToAction("Index");
             }
 
             return View();
         }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                return NotFound();
+            }
+            Category? categoryFromDb = _db.Categories.Find(id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Update(category);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                return NotFound();
+            }
+            Category? categoryFromDb = _db.Categories.Find(id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeletePost(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                return NotFound();
+            }
+            Category? categoryFromDb = _db.Categories.Find(id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Remove(categoryFromDb);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(categoryFromDb);
+        }
+
+
     }
 }
