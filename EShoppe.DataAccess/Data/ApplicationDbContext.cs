@@ -1,7 +1,7 @@
 ﻿using Eshoppe.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Eshoppe.Data
+namespace Eshoppe.DataAccess
 {
     public class ApplicationDbContext : DbContext
     {

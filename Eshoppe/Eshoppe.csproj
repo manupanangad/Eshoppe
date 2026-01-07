@@ -16,4 +16,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.22" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EShoppe.DataAccess\EShoppe.DataAccess.csproj" />
+    <ProjectReference Include="..\EShoppe.Model\EShoppe.Models.csproj" />
+  </ItemGroup>
+
 </Project>

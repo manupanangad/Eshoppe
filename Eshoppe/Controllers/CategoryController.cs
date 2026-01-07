@@ -1,4 +1,4 @@
-﻿using Eshoppe.Data;
+﻿using Eshoppe.DataAccess;
 using Eshoppe.Models;
 using Microsoft.AspNetCore.Mvc;
 

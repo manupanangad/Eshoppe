@@ -1,4 +1,4 @@
-using Eshoppe.Data;
+using Eshoppe.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
