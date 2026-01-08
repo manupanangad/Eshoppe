@@ -8,14 +8,14 @@ namespace Eshoppe.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository _categoryRepository;
-        public CategoryController(ICategoryRepository categoryRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _categoryRepository.GetAll().ToList();
+            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
             return View(objCategoryList);
         }
 
@@ -33,8 +33,8 @@ namespace Eshoppe.Controllers
             }
             if (ModelState.IsValid)
             {
-                _categoryRepository.Add(category);
-                _categoryRepository.Save();
+                _unitOfWork.Category.Add(category);
+                _unitOfWork.Save();
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
@@ -48,7 +48,7 @@ namespace Eshoppe.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _categoryRepository.Get(u => u.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -61,8 +61,8 @@ namespace Eshoppe.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryRepository.Update(category);
-                _categoryRepository.Save();
+                _unitOfWork.Category.Update(category);
+                _unitOfWork.Save();
                 TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
@@ -75,7 +75,7 @@ namespace Eshoppe.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _categoryRepository.Get(u => u.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -90,15 +90,15 @@ namespace Eshoppe.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _categoryRepository.Get(u => u.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
             if (categoryFromDb == null)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
-                _categoryRepository.Remove(categoryFromDb);
-                _categoryRepository.Save();
+                _unitOfWork.Category.Remove(categoryFromDb);
+                _unitOfWork.Save();
                 TempData["success"] = "Category deleted successfully";
                 return RedirectToAction("Index");
             }

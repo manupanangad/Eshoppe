@@ -1,5 +1,4 @@
 ﻿using Eshoppe.DataAccess;
-using Eshoppe.Models;
 using EShoppe.DataAccess.Repository.IRepository;
 using System;
 using System.Collections.Generic;
@@ -9,18 +8,19 @@ using System.Threading.Tasks;
 
 namespace EShoppe.DataAccess.Repository
 {
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
+        public ICategoryRepository Category { get; private set; }
 
-        public CategoryRepository(ApplicationDbContext db) : base(db)
+        public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            Category = new CategoryRepository(_db);
         }
-
-        public void Update(Category obj)
+        public void Save()
         {
-            _db.Categories.Update(obj);
+           _db.SaveChanges();
         }
     }
 }
