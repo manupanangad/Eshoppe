@@ -4,8 +4,9 @@ using EShoppe.DataAccess.Repository;
 using EShoppe.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Eshoppe.Controllers
+namespace Eshoppe.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -2,8 +2,9 @@ using System.Diagnostics;
 using Eshoppe.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Eshoppe.Controllers
+namespace Eshoppe.Areas.Customer.Controllers.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
